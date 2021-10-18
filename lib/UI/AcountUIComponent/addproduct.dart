@@ -144,7 +144,7 @@ class _AddProductState extends State<AddProduct> {
   void addProduct()async{
     final userId = await UserData.getUserId();
     EasyLoading.show(status: "Creating Product");
-    print(userId);
+
     final Map<String, String> data = {
       "category":cat,
       "name": _name.text,
@@ -161,6 +161,7 @@ class _AddProductState extends State<AddProduct> {
     var streamedResponse = await response.send();
     var res = await http.Response.fromStream(streamedResponse);
     EasyLoading.dismiss();
+
     if (res.statusCode < 206){
       EasyLoading.showSuccess(json.decode(res.body)['message']);
       Navigator.pop(context);
